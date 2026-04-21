@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<!-- CORRECCIÓN: Se quitó user-scalable=no y maximum-scale=1 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sistema de registro de alumnos DSM">
+
 <title>{% block titulo %}{% endblock %}</title>
 
 {% load static %}
@@ -11,101 +14,77 @@
 <link href="{% static 'inicio/css/londinium-theme.css' %}" rel="stylesheet" type="text/css">
 <link href="{% static 'inicio/css/styles.css' %}" rel="stylesheet" type="text/css">
 <link href="{% static 'inicio/css/icons.css' %}" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<!-- CORRECCIÓN: http → https en Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="js/plugins/charts/sparkline.min.js"></script>
+<!-- CORRECCIÓN: http → https en jQuery y jQueryUI -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
-<script type="text/javascript" src="js/plugins/forms/uniform.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/select2.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/inputmask.js"></script>
-<script type="text/javascript" src="js/plugins/forms/autosize.js"></script>
-<script type="text/javascript" src="js/plugins/forms/inputlimit.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/listbox.js"></script>
-<script type="text/javascript" src="js/plugins/forms/multiselect.js"></script>
-<script type="text/javascript" src="js/plugins/forms/validate.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/tags.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/switch.min.js"></script>
-
-<script type="text/javascript" src="js/plugins/forms/uploader/plupload.full.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/uploader/plupload.queue.min.js"></script>
-
-<script type="text/javascript" src="js/plugins/forms/wysihtml5/wysihtml5.min.js"></script>
-<script type="text/javascript" src="js/plugins/forms/wysihtml5/toolbar.js"></script>
-
-<script type="text/javascript" src="js/plugins/interface/daterangepicker.js"></script>
-<script type="text/javascript" src="js/plugins/interface/fancybox.min.js"></script>
-<script type="text/javascript" src="js/plugins/interface/moment.js"></script>
-<script type="text/javascript" src="js/plugins/interface/jgrowl.min.js"></script>
-<script type="text/javascript" src="js/plugins/interface/datatables.min.js"></script>
-<script type="text/javascript" src="js/plugins/interface/colorpicker.js"></script>
-<script type="text/javascript" src="js/plugins/interface/fullcalendar.min.js"></script>
-<script type="text/javascript" src="js/plugins/interface/timepicker.min.js"></script>
-
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/application.js"></script>
+<!-- CORRECCIÓN: Se eliminaron todos los scripts que causaban error 404 -->
+<script src="{% static 'inicio/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'inicio/js/application.js' %}"></script>
 
 </head>
 
 <body>
 
-	
+<div class="page-container">
 
- 	<div class="page-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
 
+        <!-- Usuario -->
+        <div class="user-menu dropdown">
+            <a href="#">
+                <!-- CORRECCIÓN: alt descriptivo en la imagen -->
+                <img src="{% block imagen %}{% endblock %}" alt="{% block imagen_alt %}Logo DSM{% endblock %}">
+                <div class="user-info">
+                    {% block span %}{% endblock %}
+                </div>
+            </a>
+        </div>
 
-		<!-- Barra de menú -->
-		<div class="sidebar">
-			<!--Imagen de Usuario-->
-			<div class="user-menu dropdown">
-				<a href="#">
-					<img src="{%block imagen%}{%endblock%}">
-					<div class="user-info">
-						{%block span%}{%endblock%}
-					</div>
-				</a>
-			</div>
-			<!--Imagen de usuario-->
-			<div class="sidebar-content">
-				<!-- Menú de navegación -->
-				<ul class="navigation">
-							<li><a href="{% url 'Principal' %}">Principal</a></li>
-							<li><a href="{% url 'Formulario' %}">Registrar</a></li>	
-                            <li><a href="{% url 'Contacto' %}">Contactanos</a></li>
-                            <li><a href="{% url 'Comentarios' %}">Comentarios</a></li>
+        <!-- Menú -->
+        <div class="sidebar-content">
+            <ul class="navigation">
+                <li><a href="{% url 'Principal' %}">Principal</a></li>
+                <li><a href="{% url 'Formulario' %}">Registrar</a></li>
+                <li><a href="{% url 'Contacto' %}">Contactanos</a></li>
+                <li><a href="{% url 'Comentarios' %}">Comentarios</a></li>
+            </ul>
+        </div>
 
-				</ul>
-				<!-- /Fin menú -->
-			</div>
-		</div>
-		<!-- /sidebar -->
-         
+    </div> <!-- FIN sidebar -->
 
+    <!-- CORRECCIÓN: <main> como punto de referencia principal -->
+    <main class="page-content">
 
-		
-	</div>
-	<!-- Contenido Principal-->
-	 	<div class="page-content">
-	{% block encavezado%}{%endblock%}
-	<div class="breadcrumb-line">
-		<ul class="breadcrumb">
-		<a href="{%url 'Principal'%}">
-			{%if request.path == '/'%}
-				Principal
-			{%else%}
-				Principal{{request.path}}
-			{%endif%}		
-		</a>
-		</ul>
-	</div>
-	
-	<!-- CONTENIDO -->
-    {% block contenido %}
-    {% endblock %}
+        {% block encabezado %}{% endblock %}
 
-	</div>
-		<!-- /Contenido Principal-->
+        <!-- CORRECCIÓN: breadcrumb con <li> correcto -->
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="{% url 'Principal' %}">
+                        {% if request.path == '/' %}
+                            Principal
+                        {% else %}
+                            Principal {{ request.path }}
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- CONTENIDO -->
+        {% block contenido %}
+        {% endblock %}
+
+    </main> <!-- FIN page-content -->
+
+</div> <!-- FIN page-container -->
+
 </body>
 </html>

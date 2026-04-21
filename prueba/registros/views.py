@@ -2,13 +2,14 @@ from urllib import request
 
 from django.shortcuts import render
 from .models import Alumnos
-from .models import ComentarioContacto 
-from .forms import ComentarioContactoForm  
-from django.shortcuts import get_object_or_404 
+from .models import ComentarioContacto
+from .forms import ComentarioContactoForm
+from django.shortcuts import get_object_or_404
 import datetime
 from .models import Archivos
 from .forms import FormArchivos
 from django.contrib import messages
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
@@ -22,16 +23,20 @@ def registros(request):
 
 
 def registrar(request):
-       if request.method == 'POST':
-              form = ComentarioContactoForm(request.POST)
-              if form.is_valid(): #Si los datos recibidos son correctos
-                     form.save()#inserta
-                     consultas=ComentarioContacto.objects.all()
-                     return render(request,'registros/contacto.html',
-                                   {'consulta':consultas})
-       form = ComentarioContactoForm()
-       #Si algo sale mal se reenvian al formulario los datos ingresados
-       return render(request,'registros/contacto.html',{'form':form})
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        mensaje = request.POST.get('mensaje')
+
+        if usuario and mensaje:
+            ComentarioContacto.objects.create(
+                usuario=usuario,
+                mensaje=mensaje
+            )
+            return redirect('Comentarios')
+
+    return redirect('Contacto')
+
+    return render(request, 'registros/contacto.html')
 
 
 def contacto(request):
@@ -39,8 +44,9 @@ def contacto(request):
 
 
 def consultarComentario(request):
-    comentarios = ComentarioContacto.objects.all()
-    return render(request, 'registros/consultarComentario.html', {'comentarios': comentarios})
+    comentarios = ComentarioContacto.objects.all().order_by('-id')
+    return render(request, 'registros/consultarComentario.html',
+                  {'comentarios': comentarios})
 
 
 def eliminarComentarioContacto(request, id,
@@ -68,10 +74,10 @@ def editarComentarioContacto(request,id):
                            {'comentarios': comentarios})
     #Si algo sale mal se reenvian al formulario los datos ingresados
        return render(request,'registros/formEditarComentario.html',
-                  {'cometario': comentario})
+              {'comentario': comentario})
 
 #Funcion FILTER
-#filter nos retornara los registros que coinciden con los parametros de busqueda dados 
+#filter nos retornara los registros que coinciden con los parametros de busqueda dados
 
 def consultas1(request):
      #con una sola condicion
@@ -104,7 +110,7 @@ def consultas6(request):
      fechaFin = datetime.date(2026, 3, 12)
      alumnos=Alumnos.objects.filter(created__range=(fechaInicio,fechaFin))
      return render(request,"registros/consultas.html", {"8A":alumnos})
- 
+
 
 def consultas7(request):
      #con una sola condicion
@@ -125,10 +131,10 @@ def archivos(request):
             messages.error(request, "Error al procesar el formulario")
     else:
         return render(request, "registros/archivos.html", {'archivo': Archivos})
-    
-    
+
+
 def consultasSQL(request):
     alumnos = Alumnos.objects.raw(
          'SELECT id,matricula, nombre, carrera, turno, imagen FROM registros_alumnos WHERE carrera="TI" ORDER BY turno DESC')
 
-    return render(request, "registros/consultas.html", {'8A': alumnos})    
+    return render(request, "registros/consultas.html", {'8A': alumnos})

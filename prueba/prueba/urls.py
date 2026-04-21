@@ -11,7 +11,6 @@ urlpatterns = [
 
     # PRINCIPAL (usuarios)
     path('', views_registros.registros, name="Principal"),
-
     # CONTACTO
     path('contacto/', views.contacto, name="Contacto"),
 
@@ -32,7 +31,7 @@ urlpatterns = [
         'eliminarComentario/<int:id>/',
         views_registros.eliminarComentarioContacto,
         name='Eliminar' ),
-    
+
     #COMENTARIOS
     path('comentarios/',views_registros.consultarComentario,name="Comentarios"),
 
@@ -47,7 +46,7 @@ urlpatterns = [
     'consultarComentario/<int:id>/',
     views_registros.consultarComentarioIndividual,
     name='ConsultarComentario'),
-    
+
     #Filtrar
     path('consultas1',views_registros.consultas1,
          name="Consultas1"),
@@ -57,19 +56,19 @@ urlpatterns = [
 
     path('consultas3',views_registros.consultas3,
          name="Consultas3"),
-         
+
     path('consultas4',views_registros.consultas4,
-         name="Consultas4"),    
+         name="Consultas4"),
 
     path('consultas5',views_registros.consultas5,
-         name="Consultas5"),        
-         
+         name="Consultas5"),
+
     path('consultas6',views_registros.consultas6,
-         name="Consultas6"),     
+         name="Consultas6"),
 
     path('consultas7',views_registros.consultas7,
-         name="Consultas7"),          
-   
+         name="Consultas7"),
+
    #Archivo
     path('subir', views_registros.archivos,name="Subir"),
 
@@ -79,7 +78,7 @@ urlpatterns = [
     path('consultasSQL', views_registros.consultasSQL, name="sql"),
 
     path('seguridad',views.seguridad,name="Seguridad"),
-] 
+]
 
 
 if settings.DEBUG:

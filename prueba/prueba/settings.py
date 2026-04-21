@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8vt#pq9$3pd^nk=&p^7i87+9we+(gml3i0jpp$7y+htd44q(td'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ernestoav.pythonanywhere.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -152,5 +152,12 @@ CKEDITOR_CONFIGS ={
 }
 }
 
+# Al final de settings.py
 
+# HTTPS / Seguridad
+SECURE_SSL_REDIRECT = False  # PythonAnywhere ya maneja esto
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
 

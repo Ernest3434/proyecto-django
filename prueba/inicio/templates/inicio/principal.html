@@ -1,56 +1,53 @@
 {% extends "inicio/encabezado.html" %}
 
+{% load static %}
+
 {% block titulo %}Principal{% endblock %}
 
-{% block imagen%}
-	{%load static%}
-	{%static 'inicio/images/home.png'%}
-{% endblock%}	
+{% block imagen %}
+{% load static %}
+{% static 'inicio/images/home.png' %}
+{% endblock %}
 
-{%block span%}Principal <span>DSM</span>{%endblock%}
+{% block imagen_alt %}Logo Principal DSM{% endblock %}
 
+{% block span %}
+Principal <span>DSM</span>
+{% endblock %}
 
+{% block encabezado %}
+<div class="page-header">
+    <div class="page-title">
+        <h3>Alumnos
+        <small>Lista de Alumnos</small></h3>
+    </div>
+</div>
+{% endblock %}
 
+{% block contenido %}
 
-			{% block encavezado%}
-			<!--Encabezdo -->
-			<div class="page-header">
-				<div class="page-title">
-					<h3>Alumnos
-				    <small>Lista de Alumnos </small></h3>
-				</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Matricula</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Turno</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="text-center">
+                <!-- CORRECCIÓN: alt agregado a la imagen de la tabla -->
+                <img src="{% static 'inicio/images/home.png' %}" width="50" alt="Foto del alumno">
+            </td>
+            <td>UTM1234TIC</td>
+            <td>Nathalia</td>
+            <td>TIC</td>
+            <td>Matutino</td>
+        </tr>
+    </tbody>
+</table>
 
-				
-			</div>
-			<!-- /Encabezado-->
-			 {%endblock%}
-
-			 
-
-
-			 {% block contenido %}
-			 <!--Tabla de alumnos-->
-			 <table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>Foto</th>
-						<th>Matricula</th>
-						<th>Nombre</th>
-						<th>Carrera</th>
-						<th>Turno</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="text-center">
-							<img src="" alt="" class="img-media">
-						</td>
-						<td class="text-semibold">UTM1234TIC</td>
-						<td class="muted">Nathalia</td>
-						<td class="muted">Tic</td>
-						<td class="muted">Matutino</td>
-					</tr>
-				</tbody>
-			 </table>
-			 <!--/Tabla de alumnos-->
-			 {% endblock %}
+{% endblock %}
